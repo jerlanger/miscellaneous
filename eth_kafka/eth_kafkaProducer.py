@@ -7,7 +7,7 @@ from ratelimit import rate_limited, sleep_and_retry
 
 
 def main():
-    producer.send('ethTest', get_price())
+    producer.send('eth-market', get_price())
 
 
 @sleep_and_retry
@@ -23,7 +23,7 @@ def get_price():
     return tmp
 
 
-producer = KafkaProducer(bootstrap_servers='localhost:9092',
+producer = KafkaProducer(bootstrap_servers='127.0.0.1:9093',
                          value_serializer=lambda v: json.dumps(v, default=str).encode('utf-8'))
 eth = Etherscan(EthScan.main_token)
 
